@@ -16,8 +16,15 @@ local tokyonight = {
 	init = function()
 		vim.cmd.colorscheme("tokyonight-storm")
 	end,
+	---@class tokyonight.Config
 	opts = {
 		transparent = true,
+
+		styles = {
+
+			sidebars = "transparent",
+			floats = "transparent",
+		},
 	},
 }
 

@@ -16,8 +16,11 @@ return {
 			"vim",
 			"vimdoc",
 			"rust",
+			"python",
 			"vue",
+			"svelte",
 			"javascript",
+			"typescript",
 		},
 		auto_install = true,
 		highlight = {
