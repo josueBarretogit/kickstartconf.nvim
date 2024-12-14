@@ -12,6 +12,7 @@ vim.opt.showmode = false
 vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus"
 end)
+
 vim.opt.termguicolors = true
 vim.opt.breakindent = true
 
@@ -37,3 +38,7 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 vim.opt.shell = "zsh"
+
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.o.expandtab = true
+vim.o.smartindent = true

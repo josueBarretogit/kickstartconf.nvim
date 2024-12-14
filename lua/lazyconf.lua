@@ -32,7 +32,6 @@ local ui_options = {
 require("lazy").setup({
 	spec = {
 		{ "tpope/vim-sleuth" },
-
 		{
 			"folke/lazydev.nvim",
 			ft = "lua",

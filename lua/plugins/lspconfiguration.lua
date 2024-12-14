@@ -42,9 +42,7 @@ return {
 		{ "williamboman/mason.nvim", config = true },
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-
 		{ "j-hui/fidget.nvim", opts = {} },
-
 		"hrsh7th/cmp-nvim-lsp",
 	},
 	config = function()
@@ -76,7 +74,7 @@ return {
 
 				vim.keymap.set("n", "<leader>fl", function()
 					vim.diagnostic.open_float()
-				end, { desc = "Open error" })
+				end, { desc = "Open diagnostics floating window" })
 
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then

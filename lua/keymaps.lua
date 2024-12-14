@@ -1,73 +1,123 @@
+---@class KeymapInfo
+---@field action any
+---@field description string
+local KeymapInfo = {}
+
+---@alias Keymap {[string] : KeymapInfo }
+
 local function map(mode, keys, actions, opts)
 	local m = mode or "n"
 	vim.keymap.set(m, keys, actions, opts)
 end
 
-map("n", "<Esc>", "<cmd>nohlsearch<CR>")
-map("n", "<c-s>", "<cmd>w<CR>")
-map("i", "jk", "<Esc>")
+---@param keymaps Keymap
+---@param mode any | nil
+local function setup_keymaps(keymaps, mode)
+	local m = mode or "n"
+	for shortcut, values in pairs(keymaps) do
+		map(m, shortcut, values.action, { desc = values.description })
+	end
+end
 
-map("n", "<leader>q", vim.diagnostic.setloclist)
+---@type Keymap
+local terminal_mode = {
+	["<Esc><Esc>"] = {
+		action = "<C-\\><C-n>",
+		description = "Escape terminal mode ",
+	},
+}
 
-map("t", "<leader>s", "<C-\\><C-n>")
-map("n", "<C-h>", "<C-w><C-h>")
-map("n", "<C-l>", "<C-w><C-l>")
-map("n", "<C-j>", "<C-w><C-j>")
-map("n", "<C-k>", "<C-w><C-k>")
-map("i", "<c-z>", "<><left>")
+setup_keymaps(terminal_mode, "t")
 
-map("n", "<leader><leader>s", "<cmd> HopWord <CR>")
-map("n", "<leader><leader>t", "<cmd> HopNodes <CR>")
+---@type Keymap
+local window_keymaps = {
+	["<C-k>"] = {
+		action = "<C-w><C-k>",
+		description = "move down windo",
+	},
+	["<C-j>"] = {
+		action = "<C-w><C-j>",
+		description = "Move up window",
+	},
+	["<C-l>"] = {
+		action = "<C-w><C-l>",
+		description = "Move rigt window",
+	},
+	["<leader>x"] = {
+		action = "<cmd> bdelete <CR>",
+		description = "Delete current tab",
+	},
+	["<s-tab>"] = {
+		action = "<cmd> bprevious <CR>",
+		description = "Previous tab",
+	},
+	["<tab>"] = {
+		action = "<cmd> bnext <CR>",
+		description = "Next tab",
+	},
+	["<M-h>"] = {
+		action = "<cmd>vertical resize +10<cr>",
+		description = "Decrease Window Width",
+	},
+	["<M-l>"] = {
+		action = "<cmd>vertical resize -10<cr>",
+		description = "Increase Window Width",
+	},
+	["<M-j>"] = {
+		action = "<cmd>resize -10<cr>",
+		description = "Decrease Window Height",
+	},
+	["<M-k>"] = {
+		action = "<cmd>resize +10<cr>",
+		description = "Increase Window Height",
+	},
+}
 
-map("n", "<tab>", "<cmd> bnext <CR>")
-map("n", "<s-tab>", "<cmd> bprevious <CR>")
-map("n", "<leader>x", "<cmd> bdelete <CR>")
-
-map("n", "<c-d>", "<C-d>zz")
-map("n", "<c-u>", "<C-u>zz")
+setup_keymaps(window_keymaps)
 
 local builtin = require("telescope.builtin")
 
+---@type Keymap
 local telescope_keymaps = {
 	["<leader>b"] = {
 		action = builtin.buffers,
-		desc = "[ ] Find existing buffers",
+		description = "[ ] Find existing buffers",
 	},
 	["<leader>s."] = {
 		action = builtin.oldfiles,
-		desc = '[S]earch Recent Files ("." for repeat)',
+		description = '[S]earch Recent Files ("." for repeat)',
 	},
 	["<leader>sr"] = {
 		action = builtin.resume,
-		desc = "[S]earch [R]esume",
+		description = "[S]earch [R]esume",
 	},
 	["<leader>sd"] = {
 		action = builtin.diagnostics,
-		desc = "[S]earch [D]iagnostics",
+		description = "[S]earch [D]iagnostics",
 	},
 	["<leader>sf"] = {
 		action = builtin.live_grep,
-		desc = "[S]earch by [G]rep",
+		description = "[S]earch by [G]rep",
 	},
 	["<leader>sw"] = {
 		action = builtin.grep_string,
-		desc = "[S]earch current [W]ord",
+		description = "[S]earch current [W]ord",
 	},
 	["<leader>ss"] = {
 		action = builtin.builtin,
-		desc = "[S]earch [S]elect Telescope",
+		description = "[S]earch [S]elect Telescope",
 	},
 	["<leader>f"] = {
 		action = builtin.find_files,
-		desc = "[S]earch [F]iles",
+		description = "[S]earch [F]iles",
 	},
 	["<leader>sk"] = {
 		action = builtin.keymaps,
-		desc = "[S]earch [K]eymaps",
+		description = "[S]earch [K]eymaps",
 	},
 	["<leader>sh"] = {
 		action = builtin.help_tags,
-		desc = "[S]earch [H]elp",
+		description = "[S]earch [H]elp",
 	},
 
 	["<leader>/"] = {
@@ -77,7 +127,7 @@ local telescope_keymaps = {
 				previewer = false,
 			}))
 		end,
-		desc = "[/] Fuzzily search in current buffer",
+		description = "[/] Fuzzily search in current buffer",
 	},
 	["<leader>s/"] = {
 		action = function()
@@ -86,27 +136,24 @@ local telescope_keymaps = {
 				prompt_title = "Live Grep in Open Files",
 			})
 		end,
-		desc = "[S]earch [/] in Open Files",
+		description = "[S]earch [/] in Open Files",
 	},
 }
 
-for shortcut, values in pairs(telescope_keymaps) do
-	map("n", shortcut, values.action, { desc = values.desc })
-end
+setup_keymaps(telescope_keymaps)
 
--- map("n", "gd", builtin.lsp_definitions, "[G]oto [D]efinition")
--- map("n", "gr", builtin.lsp_references, "[G]oto [R]eferences")
--- map("n", "gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
--- map("n", "<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
--- map("n", "<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
--- map("n", "<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
---
--- map("n", "<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
---
--- map("n", "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
---
--- map("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
---
--- vim.keymap.set("n", "<leader>fl", function()
--- 	vim.diagnostic.open_float()
--- end, { desc = "Open error" })
+map("n", "<C-h>", "<C-w><C-h>")
+map("i", "<c-z>", "<><left>")
+
+map("n", "<leader><leader>s", "<cmd> HopWord <CR>")
+map("n", "<leader><leader>t", "<cmd> HopNodes <CR>")
+
+map("n", "<c-d>", "<C-d>zz")
+map("n", "<c-u>", "<C-u>zz")
+
+map("n", "<leader>q", vim.diagnostic.setloclist)
+
+map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
+map("n", "<Esc>", "<cmd>nohlsearch<CR>")
+map("n", "<c-s>", "<cmd>w<CR>")
+map("i", "jk", "<Esc>")
