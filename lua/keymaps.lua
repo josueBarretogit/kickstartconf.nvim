@@ -142,18 +142,23 @@ local telescope_keymaps = {
 
 setup_keymaps(telescope_keymaps)
 
-map("n", "<C-h>", "<C-w><C-h>")
-map("i", "<c-z>", "<><left>")
+---@type Keymap
+local hop_words = {
+	["<leader>e"] = {
+		action = "<cmd> HopWord <CR>",
+		description = "Hop words",
+	},
+}
 
-map("n", "<leader><leader>s", "<cmd> HopWord <CR>")
-map("n", "<leader><leader>t", "<cmd> HopNodes <CR>")
+setup_keymaps(hop_words)
 
 map("n", "<c-d>", "<C-d>zz")
 map("n", "<c-u>", "<C-u>zz")
-
 map("n", "<leader>q", vim.diagnostic.setloclist)
-
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 map("n", "<c-s>", "<cmd>w<CR>")
 map("i", "jk", "<Esc>")
+map("n", "<C-h>", "<C-w><C-h>")
+map("i", "<c-z>", "<><left>")
+map("n", "<leader>te", "<cmd> terminal <CR>", { desc = "Open terminal" })
