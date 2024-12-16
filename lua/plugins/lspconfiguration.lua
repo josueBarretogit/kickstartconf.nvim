@@ -34,6 +34,7 @@ local servers = {
 			},
 		},
 	},
+	bashls = {},
 }
 
 return {

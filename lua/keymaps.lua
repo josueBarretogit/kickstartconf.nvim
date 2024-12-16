@@ -161,4 +161,45 @@ map("n", "<c-s>", "<cmd>w<CR>")
 map("i", "jk", "<Esc>")
 map("n", "<C-h>", "<C-w><C-h>")
 map("i", "<c-z>", "<><left>")
-map("n", "<leader>te", "<cmd> terminal <CR>", { desc = "Open terminal" })
+
+local harpoon = require("harpoon")
+
+---@type Keymap
+local harpoon_keymaps = {
+	["<leader>ha"] = {
+		action = function()
+			harpoon:list():add()
+		end,
+		description = "Add to harpoon",
+	},
+	["hls"] = {
+		action = function()
+			harpoon.ui:toggle_quick_menu(harpoon:list())
+		end,
+		description = "Add to harpoon",
+	},
+}
+
+setup_keymaps(harpoon_keymaps)
+
+local function go_to_terminal_buffer()
+	local buffers = vim.api.nvim_list_bufs()
+	for _, bufid in pairs(buffers) do
+		local bufname = vim.api.nvim_buf_get_name(bufid)
+		if string.find(bufname, "term://") ~= nil then
+			vim.cmd("buffer " .. bufid)
+		end
+	end
+end
+
+---@type Keymap
+local terminal_related = {
+	["gtt"] = {
+		action = function()
+			go_to_terminal_buffer()
+		end,
+		description = "Go to terminal buffer",
+	},
+}
+
+setup_keymaps(terminal_related)
