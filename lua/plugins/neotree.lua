@@ -1,4 +1,4 @@
-return {
+local neotree = {
 	"nvim-neo-tree/neo-tree.nvim",
 	version = "*",
 	dependencies = {
@@ -26,3 +26,5 @@ return {
 		},
 	},
 }
+
+return {}
