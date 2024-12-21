@@ -2,6 +2,7 @@ local servers = {
 	clangd = {},
 	gopls = {},
 	pyright = {},
+	---@version 2024-10-21
 	rust_analyzer = {
 		settings = {
 			imports = {
