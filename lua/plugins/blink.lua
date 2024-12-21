@@ -1,4 +1,4 @@
-return {
+local blink = {
 	"saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
 	dependencies = { "folke/lazydev.nvim", "mikavilpas/blink-ripgrep.nvim", { "L3MON4D3/LuaSnip", version = "v2.*" } },
@@ -122,3 +122,5 @@ return {
 		-- signature = { enabled = true }
 	},
 }
+
+return {}

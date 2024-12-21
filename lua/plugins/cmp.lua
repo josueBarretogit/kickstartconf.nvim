@@ -97,4 +97,4 @@ local cmp_config = {
 	end,
 }
 
-return {}
+return cmp_config
