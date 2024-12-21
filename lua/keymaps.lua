@@ -35,8 +35,5 @@ setup_keymaps(terminal_mode, "t")
 --- load modules in ./keymaps/*.lua
 for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/keymaps")) do
 	local formated_module = file:gsub("%.lua$", "")
-	if formated_module == "harpoon" then
-		print(formated_module)
-	end
 	setup_keymaps(require("keymaps." .. formated_module))
 end
