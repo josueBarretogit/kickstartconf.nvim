@@ -26,6 +26,10 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
+local function add_snippet(snippet)
+	ls.add_snippets("rust", snippet)
+end
+
 local result_snippet = {
 	s("res", {
 		t("-> Result<"),
@@ -37,4 +41,12 @@ local result_snippet = {
 	}),
 }
 
-ls.add_snippets("rust", result_snippet)
+add_snippet(result_snippet)
+
+local derive = {
+	s("de", {
+		t("#[derive(Debug, Default)]"),
+	}),
+}
+
+add_snippet(derive)

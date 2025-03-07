@@ -12,7 +12,7 @@ local servers = {
 				prefix = "self",
 			},
 			diagnostics = {
-				enable = false,
+				enable = true,
 			},
 			checkOnSave = {
 				command = "clippy",
@@ -20,6 +20,22 @@ local servers = {
 		},
 	},
 
+	ts_ls = {
+		init_options = {
+			plugins = {
+				{
+					name = "@vue/typescript-plugin",
+					location = "/home/josuedev/.local/share/fnm/node-versions/v22.2.0/installation/lib/node_modules/@vue/typescript-plugin",
+					languages = { "javascript", "typescript", "vue" },
+				},
+			},
+		},
+		filetypes = {
+			"javascript",
+			"typescript",
+			"vue",
+		},
+	},
 	svelte = {},
 	volar = {},
 	jsonls = {},
@@ -36,6 +52,8 @@ local servers = {
 		},
 	},
 	bashls = {},
+	yamlls = {},
+	dockerls = {},
 }
 
 return {
