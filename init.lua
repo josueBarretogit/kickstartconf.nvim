@@ -4,6 +4,7 @@
 --* options to set <leader>
 --* lazyconf to setup plugins
 --* keymaps after plugins 
+--a
 --
 --neovide and autocmds can be at last
 --]]
