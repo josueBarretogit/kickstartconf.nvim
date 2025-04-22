@@ -32,8 +32,11 @@ local servers = {
 		},
 		filetypes = {
 			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
 			"typescript",
-			"vue",
+			"typescriptreact",
+			"typescript.tsx",
 		},
 	},
 	svelte = {},
@@ -54,6 +57,7 @@ local servers = {
 	bashls = {},
 	yamlls = {},
 	dockerls = {},
+	tailwindcss = {},
 }
 
 return {

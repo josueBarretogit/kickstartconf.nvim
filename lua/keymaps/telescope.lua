@@ -31,7 +31,9 @@ return {
 		description = "[S]earch [S]elect Telescope",
 	},
 	["<leader>f"] = {
-		action = builtin.find_files,
+		action = function()
+			builtin.find_files({ hidden = true })
+		end,
 		description = "[S]earch [F]iles",
 	},
 	["<leader>sk"] = {

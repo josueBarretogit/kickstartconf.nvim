@@ -26,6 +26,9 @@ return {
 			},
 			defaults = {
 				winblend = 1,
+				file_ignore_patterns = {
+					"node_modules",
+				},
 			},
 		})
 
