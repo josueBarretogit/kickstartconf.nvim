@@ -1,3 +1,23 @@
+local typescript = {
+	init_options = {
+		-- plugins = {
+		-- 	{
+		-- 		name = "@vue/typescript-plugin",
+		-- 		location = "/home/josuedev/.local/share/fnm/node-versions/v22.2.0/installation/lib/node_modules/@vue/typescript-plugin",
+		-- 		languages = { "javascript", "typescript", "vue" },
+		-- 	},
+		-- },
+	},
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"javascript.jsx",
+		"typescript",
+		"typescriptreact",
+		"typescript.tsx",
+	},
+}
+
 local servers = {
 	clangd = {},
 	gopls = {},
@@ -19,26 +39,7 @@ local servers = {
 			},
 		},
 	},
-
-	ts_ls = {
-		init_options = {
-			plugins = {
-				{
-					name = "@vue/typescript-plugin",
-					location = "/home/josuedev/.local/share/fnm/node-versions/v22.2.0/installation/lib/node_modules/@vue/typescript-plugin",
-					languages = { "javascript", "typescript", "vue" },
-				},
-			},
-		},
-		filetypes = {
-			"javascript",
-			"javascriptreact",
-			"javascript.jsx",
-			"typescript",
-			"typescriptreact",
-			"typescript.tsx",
-		},
-	},
+	ts_ls = typescript,
 	svelte = {},
 	volar = {},
 	jsonls = {},
@@ -58,6 +59,8 @@ local servers = {
 	yamlls = {},
 	dockerls = {},
 	tailwindcss = {},
+	-- denols = {},
+	csharp_ls = {},
 }
 
 return {

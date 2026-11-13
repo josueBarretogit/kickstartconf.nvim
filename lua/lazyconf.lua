@@ -31,6 +31,7 @@ local ui_options = {
 
 require("lazy").setup({
 	spec = {
+		{ "folke/neoconf.nvim" },
 		{ "tpope/vim-sleuth" },
 		{
 			"folke/lazydev.nvim",
@@ -58,7 +59,7 @@ require("lazy").setup({
 		{
 			"chrisgrieser/nvim-various-textobjs",
 			event = "VeryLazy",
-			opts = { useDefaultKeymaps = true },
+			opts = { useDefaults = true },
 		},
 		{
 			"smoka7/hop.nvim",
